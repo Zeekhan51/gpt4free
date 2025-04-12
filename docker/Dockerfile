@@ -64,3 +64,4 @@ COPY . .
 
 # Command to run the app (replace `main:app` with your app's entrypoint if different)
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["gunicorn", "main:app", "--bind", "0.0.0.0:8080", "--worker-class", "uvicorn.workers.UvicornWorker"]
