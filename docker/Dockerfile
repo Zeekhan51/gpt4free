@@ -53,3 +53,14 @@ ADD --chown=$SEL_UID:$SEL_GID g4f $G4F_DIR/g4f
 
 # Expose ports
 EXPOSE 8080 7900
+FROM python:3.9-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+# Command to run the app (replace `main:app` with your app's entrypoint if different)
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
